@@ -8,8 +8,15 @@
     <h1>Create new page:</h1>
     <form action="" method="post">
         {% csrf_token %}
-        <p style="color: red;">  {{ error }}</p>
+        <!--<p style="color: red;">  {{ error }}</p>-->
        {{ new_page_form }}
+       <br>
+       {% if messages %}
+       {% for message in messages %}
+       {{ message }}
+       
+       {% endfor %}
+       {% endif %}
        <input type="submit">
     </form>
 

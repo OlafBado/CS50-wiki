@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 from django import forms
 from django.http import HttpResponseRedirect
 import random
+from django.contrib import messages
 
 
 
@@ -45,10 +46,10 @@ def new_page(request):
             title = form.cleaned_data["title"]
             content = form.cleaned_data["content"]
             if title in util.list_entries():
-                error = "---Title already exists!---"
+                messages.error(request, f"Title {title} already exists!")
                 return render(request, "encyclopedia/new_page.html", {
                     "new_page_form": form,
-                    "error": error
+                    "form": NewSearchForm()
                     })
             else:
                 util.save_entry(title, content)
